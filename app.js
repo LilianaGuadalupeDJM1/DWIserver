@@ -21,16 +21,6 @@ app.get('/', (req, res) => {
     res.send(messages.Welcome)
 });
 
-
-app.use(cors(
-  {
-    origin: "*",
-    methods: ['GET', 'PUT', 'POST', 'DELETE'], // Agrega 'PUT' a los métodos permitidos
-    credentials: true
-  }
-))
-
-
 /* 
  ######                             
  #     # #    # #####   ##    ####  
@@ -50,6 +40,6 @@ app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/oferta', ofertaRoutes);
 app.use('/api/profesores', profesorRoutes);
-app.use('/api/usuarios', usuarioRoutes)
+app.use('/api/usuarios', usuarioRoutes);
 
 export default app;
