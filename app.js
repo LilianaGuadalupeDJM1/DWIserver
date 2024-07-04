@@ -2,7 +2,16 @@ import cors from 'cors';
 import express from 'express';
 const app = express();
 
+// Configuración de CORS
 app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-access-token"],
+    credentials: true
+}));
+
+// Manejo de solicitudes preflight (OPTIONS)
+app.options('*', cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "x-access-token"],
@@ -31,11 +40,14 @@ app.get('/', (req, res) => {
  #     #  ####    #   #    #  ####  
                                     
 */
+
+// Importar y usar rutas
 import admisionRoutes from './src/routes/admision.routes.js';
 import authRoutes from './src/routes/auth.routes.js';
 import ofertaRoutes from './src/routes/oferta.routes.js';
 import profesorRoutes from './src/routes/profesor.routes.js';
 import usuarioRoutes from './src/routes/usuario.routes.js';
+
 app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/oferta', ofertaRoutes);
