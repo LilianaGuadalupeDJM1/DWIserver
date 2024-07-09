@@ -1,4 +1,4 @@
-import { Schema,model } from "mongoose";
+import { Schema, model } from "mongoose";
 import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
@@ -23,11 +23,9 @@ const userSchema = new Schema({
     versionKey: false
 });
 
-//Metodo para encriptar la contraseña de usuario
+// Método para encriptar la contraseña de usuario
 userSchema.statics.encryptPassword = async (password) => {
-    //Gnerear un salt para encriptar la contraseña
     const salt = await bcrypt.genSalt(10);
-    //Retornar la contraseña encriptada
     return await bcrypt.hash(password, salt);
 };
 
@@ -36,7 +34,10 @@ userSchema.statics.comparePassword = async function (password, hashedPassword) {
     return await bcrypt.compare(password, hashedPassword);
 };
 
+// Método para actualizar la contraseña
+userSchema.statics.updatePassword = async function (userId, newPassword) {
+    const encryptedPassword = await this.encryptPassword(newPassword);
+    return await this.findByIdAndUpdate(userId, { password: encryptedPassword });
+};
 
-export default model('User' ,userSchema);
-
-
+export default model('User', userSchema);

@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import mongoose from 'mongoose';
 import Role from "../models/Role.js";
-
+import bcrypt from 'bcryptjs';
 
 // Obtener todos los usuarios
 export const getUsuarios = async (req, res) => {
@@ -31,11 +31,15 @@ export const getUsuarioById = async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
-
 export const changePassword = async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
         const userId = req.params.userId;
+
+        // Verificar si los campos requeridos están presentes
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ message: 'Por favor, proporciona la contraseña actual y la nueva contraseña.' });
+        }
 
         // Obtener el usuario por ID
         const user = await User.findById(userId);
@@ -58,11 +62,9 @@ export const changePassword = async (req, res) => {
 
         res.status(200).json({ message: 'Contraseña actualizada correctamente' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al actualizar la contraseña', error: error.message });
     }
 };
-
-
 
 
 
