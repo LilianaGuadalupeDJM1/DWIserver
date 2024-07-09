@@ -26,8 +26,8 @@ import { authJwt } from "../middlewares/index.js";
 
 router.get('/', userCtrl.getUsuarios);
 router.get('/:usuarioId', userCtrl.getUsuarioById);
-router.put('/:usuarioId',[authJwt.verifyToken], userCtrl.updateUsuario);
-router.delete('/:usuarioId',[authJwt.verifyToken,authJwt.isAdmin], userCtrl.deleteUsuario);
+router.put('/:usuarioId', userCtrl.updateUsuario);
+router.delete('/:usuarioId', userCtrl.deleteUsuario);
 router.put('/:userId/change-password', userCtrl.changePassword);
 
 export default router;
