@@ -125,3 +125,45 @@ export const deleteUsuario = async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
+
+// Crear un nuevo usuario
+export const createUser = async (req, res) => {
+    try {
+        const { username, email, password, roles } = req.body;
+
+        // Verificar que el usuario no exista ya
+        const userExists = await User.findOne({ email });
+        if (userExists) {
+            return res.status(400).json({ message: 'El usuario ya existe' });
+        }
+
+        // Encriptar la contraseña
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Crear nuevo usuario
+        const newUser = new User({
+            username,
+            email,
+            password: hashedPassword
+        });
+
+        // Asignar roles si se proporcionan
+        if (roles && roles.length > 0) {
+            const foundRoles = await Role.find({ name: { $in: roles } });
+            newUser.roles = foundRoles.map(role => role.id);
+        } else {
+            // Por defecto asignar el rol de 'customer'
+            const defaultRole = await Role.findOne({ name: 'customer' });
+            newUser.roles = [defaultRole.id];
+        }
+
+        // Guardar usuario en la base de datos
+        const savedUser = await newUser.save();
+
+        res.status(201).json(savedUser);
+    } catch (error) {
+        console.error('Error al crear usuario:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+};
+

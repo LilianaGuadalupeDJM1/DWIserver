@@ -29,5 +29,5 @@ router.get('/:usuarioId', userCtrl.getUsuarioById);
 router.put('/:usuarioId', userCtrl.updateUsuario);
 router.delete('/:usuarioId', userCtrl.deleteUsuario);
 router.put('/:userId/change-password', userCtrl.changePassword);
-
+router.post('/', userCtrl.createUser);
 export default router;
