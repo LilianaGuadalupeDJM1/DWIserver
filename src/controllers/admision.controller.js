@@ -1,5 +1,44 @@
 import Admision from '../models/admision.js';
 import mongoose from 'mongoose';
+import OfertaEducativa from '../models/ofertaEducativa.js';
+
+export const relacionarAdmisionOferta = async (req, res) => {
+    try {
+        const { admisionId, ofertaEducativaIds } = req.body;
+
+        // Validar existencia de la admisión
+        const admision = await Admision.findById(admisionId);
+        if (!admision) {
+            return res.status(404).json({ message: 'Admisión no encontrada' });
+        }
+
+        // Validar existencia de las ofertas educativas
+        const ofertasEducativas = await OfertaEducativa.find({
+            _id: { $in: ofertaEducativaIds }
+        });
+
+        if (ofertasEducativas.length !== ofertaEducativaIds.length) {
+            return res.status(404).json({ message: 'Una o más ofertas educativas no encontradas' });
+        }
+
+        // Relacionar las ofertas educativas con la admisión
+        admision.ofertasEducativas = ofertaEducativaIds;
+        const admisionSave = await admision.save();
+
+        // Opcional: Relacionar la admisión con las ofertas educativas
+        for (let oferta of ofertasEducativas) {
+            if (!oferta.admisiones.includes(admisionId)) {
+                oferta.admisiones.push(admisionId);
+                await oferta.save();
+            }
+        }
+
+        res.status(200).json({ message: 'Relación creada exitosamente', admision: admisionSave });
+    } catch (error) {
+        console.error('Error al crear la relación:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+};
 
 export const getAdmisiones = async (req, res) =>{
     const admisiones = await Admision.find();

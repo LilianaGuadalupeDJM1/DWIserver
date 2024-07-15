@@ -8,10 +8,14 @@ const admisionSchema = new Schema({
     activo: {
         type: Boolean,
         default: true
-    }
+    },
+    ofertasEducativas: [{
+        type: Schema.Types.ObjectId,
+        ref: 'OfertaEducativa'
+    }]
 }, {
     timestamps: true,
     versionKey: false
 });
 
-export default model('Admision', admisionSchema)
+export default model('Admision', admisionSchema);

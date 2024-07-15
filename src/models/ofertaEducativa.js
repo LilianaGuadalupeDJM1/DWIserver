@@ -10,7 +10,15 @@ const ofertaEducativaSchema = new Schema({
     activo: {
         type: Boolean,
         default: true
-    }
+    },
+    admisiones: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Admision'
+    }],
+    profesores: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Profesor'
+    }]
 }, {
     timestamps: true,
     versionKey: false

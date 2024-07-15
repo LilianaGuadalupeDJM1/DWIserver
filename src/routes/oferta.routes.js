@@ -53,5 +53,6 @@ router.get('/:ofertaId',  ofertaCtrl.getOfertaById);
 router.post('/',[authJwt.verifyToken,authJwt.isAdmin], ofertaCtrl.createOferta);
 router.put('/:ofertaId',[authJwt.verifyToken,authJwt.isAdmin],  ofertaCtrl.updateOferta);
 router.delete('/:ofertaId', [authJwt.verifyToken,authJwt.isAdmin], ofertaCtrl.deleteOferta);
+router.post('/vincular-profesores', ofertaCtrl.vincularProfesores);
 
 export default router;

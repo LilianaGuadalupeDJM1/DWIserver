@@ -32,5 +32,6 @@ router.get('/:admisionId', admisionCtrl.getAdmisionById);
 router.post('/',[authJwt.verifyToken, authJwt.isAdmin], admisionCtrl.createAdmision);
 router.put('/:admisionId', [authJwt.verifyToken, authJwt.isAdmin],admisionCtrl.updateAdmision);
 router.delete('/:admisionId',[authJwt.verifyToken, authJwt.isAdmin], admisionCtrl.deleteAdmision);
+router.post('/relacionarAdmisionOferta', admisionCtrl.relacionarAdmisionOferta);
 
 export default router;
