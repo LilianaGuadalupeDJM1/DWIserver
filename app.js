@@ -47,11 +47,12 @@ import authRoutes from './src/routes/auth.routes.js';
 import ofertaRoutes from './src/routes/oferta.routes.js';
 import profesorRoutes from './src/routes/profesor.routes.js';
 import usuarioRoutes from './src/routes/usuario.routes.js';
+import divicionesRoutes from './src/routes/diviciones.routes.js';
 
 app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/oferta', ofertaRoutes);
 app.use('/api/profesores', profesorRoutes);
 app.use('/api/usuarios', usuarioRoutes);
-
+app.use('/api/diviciones', divicionesRoutes);
 export default app;
