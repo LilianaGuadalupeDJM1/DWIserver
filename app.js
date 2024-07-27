@@ -49,6 +49,7 @@ import profesorRoutes from './src/routes/profesor.routes.js';
 import usuarioRoutes from './src/routes/usuario.routes.js';
 import divicionesRoutes from './src/routes/diviciones.routes.js';
 import materiaRoutes from './src/routes/materia.routes.js';
+import cuatrimestreRoutes from './src/routes/cuatrimestre.routes.js';
 
 
 app.use('/api/admision', admisionRoutes);
@@ -58,4 +59,5 @@ app.use('/api/profesores', profesorRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/diviciones', divicionesRoutes);
 app.use('/api/materias', materiaRoutes);
+app.use('/api/cuatrimestre', cuatrimestreRoutes);
 export default app;
