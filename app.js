@@ -50,8 +50,8 @@ import usuarioRoutes from './src/routes/usuario.routes.js';
 import divicionesRoutes from './src/routes/diviciones.routes.js';
 import materiaRoutes from './src/routes/materia.routes.js';
 import cuatrimestreRoutes from './src/routes/cuatrimestre.routes.js';
-
-
+import rolesRoutes from        './src/routes/rol.routes.js';
+import cursoRoutes from        './src/routes/curso.routes.js';
 app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/oferta', ofertaRoutes);
@@ -60,4 +60,6 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/diviciones', divicionesRoutes);
 app.use('/api/materias', materiaRoutes);
 app.use('/api/cuatrimestre', cuatrimestreRoutes);
+app.use('/api/roles', rolesRoutes);
+app.use('/api/cursos', cursoRoutes);
 export default app;
