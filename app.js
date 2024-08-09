@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 const app = express();
 
+
 // Configuración de CORS
 app.use(cors({
     origin: "*",
