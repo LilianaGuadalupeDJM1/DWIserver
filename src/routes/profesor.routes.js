@@ -30,8 +30,8 @@ import { authJwt } from "../middlewares/index.js";
 router.get('/', profesorCtrl.getProfesores);
 router.get('/:profesorId', profesorCtrl.getProfesorById);
 //router.post('/', [authJwt.verifyToken,authJwt.isAdmin],profesorCtrl.createProfesor);
-router.post('/',[authJwt.verifyToken, authJwt.isAdmin], profesorCtrl.createProfesor);
-router.put('/:profesorId',[authJwt.verifyToken, authJwt.isAdmin], profesorCtrl.updateProfesor);
-router.delete('/:profesorId',[authJwt.verifyToken, authJwt.isAdmin], profesorCtrl.deleteProfesor);
+router.post('/',profesorCtrl.createProfesor);
+router.put('/:profesorId', profesorCtrl.updateProfesor);
+router.delete('/:profesorId', profesorCtrl.deleteProfesor);
 
 export default router;
