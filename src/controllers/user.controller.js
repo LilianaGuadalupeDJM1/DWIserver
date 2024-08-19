@@ -149,7 +149,7 @@ export const createUser = async (req, res) => {
 
         // Asignar roles si se proporcionan
         if (roles && roles.length > 0) {
-            const foundRoles = await Role.find({ name: { $in: roles } });
+            const foundRoles = await Role.find({ _id: { $in: roles } });
             newUser.roles = foundRoles.map(role => role.id);
         } else {
             // Por defecto asignar el rol de 'customer'
