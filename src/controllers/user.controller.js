@@ -84,7 +84,7 @@ export const updateUsuario = async (req, res) => {
         // Convertir los roles a ObjectId y verificar si existen en la base de datos
         let rolesObjectId = [];
         if (roles && roles.length > 0) {
-            const existingRoles = await Role.find({ name: { $in: roles } });
+            const existingRoles = await Role.find({ _id: { $in: roles } });
             if (existingRoles.length !== roles.length) {
                 return res.status(400).json({ message: 'Uno o más roles no existen' });
             }
