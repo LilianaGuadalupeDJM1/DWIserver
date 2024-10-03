@@ -14,7 +14,7 @@ app.use(cors({
 // Manejo de solicitudes preflight (OPTIONS)
 app.options('*', cors({
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "x-access-token"],
     credentials: true
 }));
